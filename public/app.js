@@ -1151,7 +1151,92 @@ function updateProgressBar() {
 // MODAL CONTROLLERS
 // ==============================================================================
 
-function setupNavigation() {
+// ==============================================================================
+// PASSWORD VISIBILITY TOGGLE & GOOGLE AUTH
+// ==============================================================================
+
+function togglePasswordVisibility(inputId, btn) {
+  const input = document.getElementById(inputId);
+  if (!input) return;
+
+  if (input.type === 'password') {
+    input.type = 'text';
+    btn.innerText = '🙈';
+    btn.title = 'Hide Password';
+  } else {
+    input.type = 'password';
+    btn.innerText = '👁️';
+    btn.title = 'Show Password';
+  }
+}
+
+function triggerGoogleSignIn() {
+  if (typeof google !== 'undefined' && google.accounts && google.accounts.id) {
+    google.accounts.id.initialize({
+      client_id: '921820491823-koreanmastery.apps.googleusercontent.com', // Replace with production client ID if desired
+      callback: handleGoogleResponse
+    });
+    google.accounts.id.prompt((notification) => {
+      if (notification.isNotDisplayed() || notification.isSkippedMoment()) {
+        promptManualGoogleAuth();
+      }
+    });
+  } else {
+    promptManualGoogleAuth();
+  }
+}
+
+async function handleGoogleResponse(response) {
+  showNotification("Signing in with Google...", "info");
+  try {
+    const res = await fetch(`${API_BASE}/auth/google`, {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({ credential: response.credential })
+    });
+    const data = await res.json();
+    if (res.ok && data.status === 'success') {
+      state.token = data.token;
+      state.user = data.user;
+      localStorage.setItem('km_token', data.token);
+      closeModal('loginModal');
+      closeModal('registerModal');
+      updateUIForUser();
+      showNotification(`Welcome, ${data.user.full_name}! 🇰🇷`, "success");
+    } else {
+      alert(data.message || "Google sign-in failed.");
+    }
+  } catch (err) {
+    alert("Connection error during Google authentication.");
+  }
+}
+
+function promptManualGoogleAuth() {
+  const email = prompt("Enter your Google Account email to continue:");
+  if (!email || !email.includes('@')) return;
+  const fullName = email.split('@')[0].replace('.', ' ').toUpperCase();
+
+  fetch(`${API_BASE}/auth/google`, {
+    method: 'POST',
+    headers: { 'Content-Type': 'application/json' },
+    body: JSON.stringify({ email: email.trim(), full_name: fullName })
+  })
+  .then(res => res.json())
+  .then(data => {
+    if (data.status === 'success') {
+      state.token = data.token;
+      state.user = data.user;
+      localStorage.setItem('km_token', data.token);
+      closeModal('loginModal');
+      closeModal('registerModal');
+      updateUIForUser();
+      showNotification(`Welcome, ${data.user.full_name}! 🇰🇷`, "success");
+    } else {
+      alert(data.message || "Google login failed.");
+    }
+  })
+  .catch(() => alert("Network error connecting to Google service."));
+}
   document.querySelectorAll('.portal-nav-item').forEach(btn => {
     btn.addEventListener('click', () => {
       const tab = btn.getAttribute('data-tab');
