@@ -1237,6 +1237,8 @@ function promptManualGoogleAuth() {
   })
   .catch(() => alert("Network error connecting to Google service."));
 }
+
+function setupNavigation() {
   document.querySelectorAll('.portal-nav-item').forEach(btn => {
     btn.addEventListener('click', () => {
       const tab = btn.getAttribute('data-tab');
