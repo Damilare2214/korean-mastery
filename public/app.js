@@ -16,10 +16,10 @@ const state = {
   canvasDrawing: false
 };
 
-// API Base URL (Auto-switches to Render Production Backend or local proxy)
-const API_BASE = window.location.hostname.includes('netlify.app') 
-  ? 'https://korean-mastery-backend.onrender.com/api' 
-  : '/api';
+// API Base URL (Direct Production Render Backend or local dev)
+const API_BASE = (window.location.hostname === 'localhost' || window.location.hostname === '127.0.0.1')
+  ? '/api'
+  : 'https://korean-mastery-backend.onrender.com/api';
 
 // ==============================================================================
 // INITIALIZATION & EVENT LISTENERS
