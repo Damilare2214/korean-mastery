@@ -30,6 +30,9 @@ document.addEventListener('DOMContentLoaded', async () => {
   setupAuthModals();
   setupLegalModals();
 
+  // Initialize Google Auth when ready
+  setTimeout(initGoogleAuth, 500);
+
   if (state.token) {
     await fetchCurrentUser();
   } else {
@@ -1170,17 +1173,51 @@ function togglePasswordVisibility(inputId, btn) {
   }
 }
 
+const GOOGLE_CLIENT_ID = '903382447333-h4sinotuhup096ik0392b1rgsk7jnlun.apps.googleusercontent.com';
+
+function initGoogleAuth() {
+  if (typeof google !== 'undefined' && google.accounts && google.accounts.id) {
+    google.accounts.id.initialize({
+      client_id: GOOGLE_CLIENT_ID,
+      callback: handleGoogleResponse,
+      auto_select: false,
+      cancel_on_tap_outside: true
+    });
+
+    // Render Google buttons if containers exist
+    const regContainer = document.getElementById('googleButtonRegister');
+    if (regContainer) {
+      google.accounts.id.renderButton(regContainer, {
+        theme: 'outline',
+        size: 'large',
+        width: '100%',
+        text: 'continue_with',
+        shape: 'rectangular',
+        logo_alignment: 'center'
+      });
+    }
+
+    const loginContainer = document.getElementById('googleButtonLogin');
+    if (loginContainer) {
+      google.accounts.id.renderButton(loginContainer, {
+        theme: 'outline',
+        size: 'large',
+        width: '100%',
+        text: 'continue_with',
+        shape: 'rectangular',
+        logo_alignment: 'center'
+      });
+    }
+  }
+}
+
 function triggerGoogleSignIn() {
   if (typeof google !== 'undefined' && google.accounts && google.accounts.id) {
     google.accounts.id.initialize({
-      client_id: '921820491823-koreanmastery.apps.googleusercontent.com', // Replace with production client ID if desired
+      client_id: GOOGLE_CLIENT_ID,
       callback: handleGoogleResponse
     });
-    google.accounts.id.prompt((notification) => {
-      if (notification.isNotDisplayed() || notification.isSkippedMoment()) {
-        promptManualGoogleAuth();
-      }
-    });
+    google.accounts.id.prompt();
   } else {
     promptManualGoogleAuth();
   }
