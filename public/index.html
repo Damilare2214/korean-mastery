@@ -1,0 +1,627 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Korean Mastery Nigeria 🇰🇷 | Learn Korean for Jobs, EPS-TOPIK, GKS & Daily Life</title>
+  <meta name="description" content="The scientifically structured Korean language course built for Nigerians. Master Hangul for free, speak survival Korean for ₦500, and unlock EPS-TOPIK fluency tools for ₦2,000.">
+  
+  <!-- Google Fonts: Noto Sans KR & Plus Jakarta Sans -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@300;400;500;700;900&family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+  
+  <!-- Stylesheet -->
+  <link rel="stylesheet" href="styles.css">
+
+  <!-- Paystack Inline JS -->
+  <script src="https://js.paystack.co/v1/inline.js" async></script>
+</head>
+<body>
+
+  <!-- ==============================================================================
+       NAVBAR
+       ============================================================================== -->
+  <nav class="navbar">
+    <div class="nav-container">
+      <a href="#" class="logo">
+        <span>🇰🇷</span>
+        <span>Korean Mastery</span>
+        <span class="logo-badge">한국어</span>
+      </a>
+
+      <ul class="nav-links">
+        <li><a href="#curriculum" class="nav-link">Curriculum</a></li>
+        <li><a href="#epstopik" class="nav-link">Korea Jobs & EPS-TOPIK</a></li>
+        <li><a href="#pricing" class="nav-link">Course Tiers</a></li>
+        <li><a href="#portal" class="nav-link" onclick="switchTab('tier1_hangul')">Classroom Portal</a></li>
+      </ul>
+
+      <div class="nav-auth-actions" id="navAuthContainer">
+        <!-- Injected dynamically by app.js -->
+        <button class="btn btn-outline btn-sm" onclick="openModal('loginModal')">Log In</button>
+        <button class="btn btn-primary btn-sm" onclick="openModal('registerModal')">Get Started Free</button>
+      </div>
+    </div>
+  </nav>
+
+  <!-- ==============================================================================
+       HERO SECTION
+       ============================================================================== -->
+  <header class="hero-section">
+    <div class="hero-container">
+      <div class="hero-text-content">
+        <div class="hero-pill">
+          <span>🎯</span> Built specifically for Nigerian learners, jobseekers & scholars
+        </div>
+        <h1 class="hero-title">
+          Learn Korean in Nigeria. <br>
+          <span class="highlight">From Zero to Speaking</span>, EPS-TOPIK & Global Careers.
+        </h1>
+        <p class="hero-subtitle">
+          Hangul was scientifically engineered so anyone can read it in one day. Master the Korean alphabet for <strong>₦0 free</strong>, unlock survival conversation for <strong>₦500</strong>, or prepare for EPS-TOPIK jobs and GKS scholarships for <strong>₦2,000</strong>.
+        </p>
+
+        <div class="hero-cta-group">
+          <a href="#portal" class="btn btn-primary btn-lg" onclick="switchTab('tier1_hangul')">
+            Start Free with Hangul (₦0)
+          </a>
+          <button class="btn btn-gold btn-lg" onclick="startCheckout(2)">
+            Unlock Survival Korean (₦500)
+          </button>
+        </div>
+
+        <div class="hero-stats-row">
+          <div class="stat-item">
+            <h4>₦0 Free</h4>
+            <p>100% genuine Hangul foundation with audio</p>
+          </div>
+          <div class="stat-item">
+            <h4>₩2.06M+</h4>
+            <p>Monthly salary (~₦2.3M) on Korea E-9 visas</p>
+          </div>
+          <div class="stat-item">
+            <h4>Instant</h4>
+            <p>Paystack naira activation & self-healing</p>
+          </div>
+        </div>
+      </div>
+
+      <div class="hero-card-preview">
+        <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 1rem;">
+          <div>
+            <span class="badge badge-free">Instant Interactive Demo</span>
+            <h3 style="font-size: 1.15rem; font-weight: 800; margin-top: 0.2rem;">Try Reading Hangul Right Now</h3>
+          </div>
+          <button class="btn btn-outline btn-sm" onclick="playKoreanAudio('안녕하세요')">🔊 Listen</button>
+        </div>
+
+        <div style="background: #f8fafc; border: 1px solid #e2e8f0; border-radius: 12px; padding: 1.25rem; margin-bottom: 1rem;">
+          <div style="display: flex; justify-content: space-between; align-items: center;">
+            <span class="hangul-text" style="font-size: 1.85rem; font-weight: 900; color: #1e3a8a;">안녕하세요</span>
+            <span style="background: #e0f2fe; color: #0284c7; padding: 4px 8px; border-radius: 6px; font-size: 0.75rem; font-weight: 700;">Polite Hello</span>
+          </div>
+          <div style="color: #dc2626; font-size: 0.85rem; font-weight: 600; margin: 0.25rem 0;">An-nyeong-ha-se-yo</div>
+          <p style="font-size: 0.82rem; color: #475569; margin-top: 0.5rem;">
+            Literally translates to <em>"Are you in peace?"</em> Used 24/7 across South Korea to greet colleagues, friends, and elders politely.
+          </p>
+        </div>
+
+        <div style="display: grid; grid-template-columns: repeat(3, 1fr); gap: 0.5rem;">
+          <div class="char-card" style="padding: 0.6rem 0.4rem;" onclick="playKoreanAudio('한')">
+            <div class="char-glyph" style="font-size: 1.4rem;">한</div>
+            <div class="char-rom" style="font-size: 0.75rem;">Han (Korea)</div>
+          </div>
+          <div class="char-card" style="padding: 0.6rem 0.4rem;" onclick="playKoreanAudio('국')">
+            <div class="char-glyph" style="font-size: 1.4rem;">국</div>
+            <div class="char-rom" style="font-size: 0.75rem;">Guk (Country)</div>
+          </div>
+          <div class="char-card" style="padding: 0.6rem 0.4rem;" onclick="playKoreanAudio('물')">
+            <div class="char-glyph" style="font-size: 1.4rem;">물</div>
+            <div class="char-rom" style="font-size: 0.75rem;">Mul (Water)</div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </header>
+
+  <!-- ==============================================================================
+       EPS-TOPIK & NIGERIA MARKET SECTION
+       ============================================================================== -->
+  <section id="epstopik" style="background: #ffffff; padding: 4.5rem 1.5rem; border-bottom: 1px solid var(--border);">
+    <div style="max-width: 1200px; margin: 0 auto;">
+      <div class="section-header">
+        <span class="badge badge-verified" style="margin-bottom: 0.5rem;">The EPS-TOPIK & GKS Gateway</span>
+        <h2 class="section-title">Why Korean Language is Your Highest-ROI Skill in Nigeria</h2>
+        <p class="section-subtitle">
+          South Korea is actively recruiting skilled and non-professional personnel through official bilateral government agreements. Language proficiency is the single gatekeeper.
+        </p>
+      </div>
+
+      <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 1.5rem;">
+        <div style="background: #f8fafc; border: 1px solid #e2e8f0; border-radius: 12px; padding: 1.75rem;">
+          <div style="font-size: 2rem; margin-bottom: 0.5rem;">🏭</div>
+          <h3 style="font-size: 1.2rem; font-weight: 800; color: #0f172a; margin-bottom: 0.5rem;">EPS E-9 Work Visas</h3>
+          <p style="font-size: 0.88rem; color: #475569; line-height: 1.5;">
+            The Korean government's Employment Permit System matches foreign workers with manufacturing, agriculture, and construction companies. Guaranteed minimum wage is <strong>₩2.06M+ (~₦2.3M/month)</strong>. Passing EPS-TOPIK is mandatory to enter the HRD roster.
+          </p>
+        </div>
+
+        <div style="background: #f8fafc; border: 1px solid #e2e8f0; border-radius: 12px; padding: 1.75rem;">
+          <div style="font-size: 2rem; margin-bottom: 0.5rem;">🎓</div>
+          <h3 style="font-size: 1.2rem; font-weight: 800; color: #0f172a; margin-bottom: 0.5rem;">Global Korea Scholarship (GKS)</h3>
+          <p style="font-size: 0.88rem; color: #475569; line-height: 1.5;">
+            Fully funded bachelor's, master's, and PhD programs offered through the Korean Cultural Centre Nigeria (KCCN) in Abuja. 100% free tuition, monthly stipends, and roundtrip flight. Korean ability gives you huge competitive points.
+          </p>
+        </div>
+
+        <div style="background: #f8fafc; border: 1px solid #e2e8f0; border-radius: 12px; padding: 1.75rem;">
+          <div style="font-size: 2rem; margin-bottom: 0.5rem;">🏢</div>
+          <h3 style="font-size: 1.2rem; font-weight: 800; color: #0f172a; margin-bottom: 0.5rem;">Daewoo, Samsung & LG in Nigeria</h3>
+          <p style="font-size: 0.88rem; color: #475569; line-height: 1.5;">
+            South Korean multinational giants operate major engineering and commercial operations in Lagos, Bonny Island, and Abuja. Staff with Korean conversational ability and business etiquette stand out for promotions and leadership.
+          </p>
+        </div>
+
+        <div style="background: #f8fafc; border: 1px solid #e2e8f0; border-radius: 12px; padding: 1.75rem;">
+          <div style="font-size: 2rem; margin-bottom: 0.5rem;">🎬</div>
+          <h3 style="font-size: 1.2rem; font-weight: 800; color: #0f172a; margin-bottom: 0.5rem;">K-Drama & K-Pop Immersion</h3>
+          <p style="font-size: 0.88rem; color: #475569; line-height: 1.5;">
+            Stop relying on delayed English subtitles. Understand nuance, honorific titles (Oppa, Unnie, Sunbae), and cultural context directly in Korean as you watch your favorite series.
+          </p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ==============================================================================
+       PRICING & COURSE TIERS
+       ============================================================================== -->
+  <section id="pricing" class="pricing-section">
+    <div class="section-header">
+      <span class="badge badge-tier2" style="margin-bottom: 0.5rem;">Transparent Naira Pricing</span>
+      <h2 class="section-title">Three Clearly Defined Tiers. Lifetime Access.</h2>
+      <p class="section-subtitle">
+        Zero monthly subscriptions. Pay once via Paystack with instant naira access.
+      </p>
+    </div>
+
+    <div class="pricing-grid">
+      <!-- Tier 1: Free Foundation -->
+      <div class="pricing-card">
+        <div>
+          <div class="tier-header">
+            <span class="badge badge-free">Tier 1</span>
+            <h3 class="tier-title" style="margin-top: 0.5rem;">Free Foundation</h3>
+            <p class="tier-target">Master the complete Korean alphabet (Hangul) in a single afternoon.</p>
+          </div>
+
+          <div class="tier-price-box">
+            <div class="tier-price">₦0 <span>/ lifetime</span></div>
+          </div>
+
+          <ul class="feature-list">
+            <li>
+              <svg width="18" height="18" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"/></svg>
+              <span>10 Basic Vowels & 11 Compound Vowels</span>
+            </li>
+            <li>
+              <svg width="18" height="18" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"/></svg>
+              <span>14 Consonants + 5 Double Consonants</span>
+            </li>
+            <li>
+              <svg width="18" height="18" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"/></svg>
+              <span>Syllable Block Construction (Batchim)</span>
+            </li>
+            <li>
+              <svg width="18" height="18" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"/></svg>
+              <span>25 High-Frequency Core Daily Words</span>
+            </li>
+            <li>
+              <svg width="18" height="18" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"/></svg>
+              <span>Interactive Hangul Mastery Quiz</span>
+            </li>
+          </ul>
+        </div>
+
+        <button class="btn btn-outline" style="width: 100%;" onclick="switchTab('tier1_hangul')">
+          Start Free Now
+        </button>
+      </div>
+
+      <!-- Tier 2: Survival Korean -->
+      <div class="pricing-card">
+        <div>
+          <div class="tier-header">
+            <span class="badge badge-tier2">Tier 2</span>
+            <h3 class="tier-title" style="margin-top: 0.5rem;">Survival Korean</h3>
+            <p class="tier-target">Daily conversational competence for shopping, restaurants & commuting.</p>
+          </div>
+
+          <div class="tier-price-box">
+            <div class="tier-price">₦500 <span>/ one-time</span></div>
+          </div>
+
+          <ul class="feature-list">
+            <li>
+              <svg width="18" height="18" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"/></svg>
+              <span>Everything in Free Foundation</span>
+            </li>
+            <li>
+              <svg width="18" height="18" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"/></svg>
+              <span>Politeness Levels (~합니다 vs ~해요 vs 반말)</span>
+            </li>
+            <li>
+              <svg width="18" height="18" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"/></svg>
+              <span>Sino-Korean & Native Korean Number Systems</span>
+            </li>
+            <li>
+              <svg width="18" height="18" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"/></svg>
+              <span>Restaurant Ordering & Food Survival</span>
+            </li>
+            <li>
+              <svg width="18" height="18" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"/></svg>
+              <span>Transport, Directions & Family Hierarchy</span>
+            </li>
+          </ul>
+        </div>
+
+        <button class="btn btn-gold" style="width: 100%;" onclick="startCheckout(2)">
+          Unlock Tier 2 (₦500)
+        </button>
+      </div>
+
+      <!-- Tier 3: Fluency & Career Tools -->
+      <div class="pricing-card featured popular-badge">
+        <div>
+          <div class="tier-header">
+            <span class="badge badge-tier3">Tier 3</span>
+            <h3 class="tier-title" style="margin-top: 0.5rem;">Fluency & Career Suite</h3>
+            <p class="tier-target">Full vocational toolkit for EPS-TOPIK candidates, GKS scholars & professionals.</p>
+          </div>
+
+          <div class="tier-price-box">
+            <div class="tier-price">₦2,000 <span>/ one-time</span></div>
+          </div>
+
+          <ul class="feature-list">
+            <li>
+              <svg width="18" height="18" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"/></svg>
+              <span>Everything in Tier 1 & Tier 2</span>
+            </li>
+            <li>
+              <svg width="18" height="18" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"/></svg>
+              <span>EPS-TOPIK Exam & Factory Safety Vocabulary</span>
+            </li>
+            <li>
+              <svg width="18" height="18" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"/></svg>
+              <span>Interactive SRS Flashcards Engine (Leitner)</span>
+            </li>
+            <li>
+              <svg width="18" height="18" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"/></svg>
+              <span>Interactive Stroke Writing Practice Canvas</span>
+            </li>
+            <li>
+              <svg width="18" height="18" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"/></svg>
+              <span>Interactive AI Dialogue Simulator Scenarios</span>
+            </li>
+            <li>
+              <svg width="18" height="18" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"/></svg>
+              <span>Business Etiquette & GKS Action Roadmap</span>
+            </li>
+            <li>
+              <svg width="18" height="18" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"/></svg>
+              <span>Official Verifiable PDF Certificate of Completion</span>
+            </li>
+          </ul>
+        </div>
+
+        <button class="btn btn-primary" style="width: 100%;" onclick="startCheckout(3)">
+          Get Fluency Suite (₦2,000)
+        </button>
+      </div>
+    </div>
+  </section>
+
+  <!-- ==============================================================================
+       INTERACTIVE LEARNING PORTAL & CLASSROOM
+       ============================================================================== -->
+  <section id="portal" style="background: #f1f5f9; padding: 3rem 0; border-top: 1px solid var(--border);">
+    <div class="portal-container">
+      
+      <!-- Sidebar Navigation -->
+      <aside class="portal-sidebar">
+        <div id="sidebarUserInfo">
+          <!-- Injected dynamically by app.js -->
+        </div>
+
+        <div class="progress-widget">
+          <div class="progress-label">
+            <span>Overall Progress</span>
+            <span id="progressPercentageLabel">0%</span>
+          </div>
+          <div class="progress-bar-bg">
+            <div id="progressBarFill" class="progress-bar-fill"></div>
+          </div>
+        </div>
+
+        <ul class="portal-nav-list">
+          <li style="font-size: 0.72rem; font-weight: 800; color: #94a3b8; text-transform: uppercase; margin: 0.5rem 0 0.2rem; padding: 0 0.5rem;">
+            Tier 1: Free Foundation
+          </li>
+          <li class="portal-nav-item active" data-tab="tier1_hangul">
+            <span>1. Hangul Alphabet</span>
+          </li>
+          <li class="portal-nav-item" data-tab="tier1_words">
+            <span>2. 25 Core Words</span>
+          </li>
+          <li class="portal-nav-item" data-tab="tier1_quiz">
+            <span>3. Hangul Quiz</span>
+          </li>
+
+          <li style="font-size: 0.72rem; font-weight: 800; color: #94a3b8; text-transform: uppercase; margin: 1rem 0 0.2rem; padding: 0 0.5rem;">
+            Tier 2: Survival (₦500)
+          </li>
+          <li class="portal-nav-item locked" data-tab="tier2_numbers">
+            <span>4. Sino & Native Numbers</span>
+            <span class="lock-icon">🔒</span>
+          </li>
+          <li class="portal-nav-item locked" data-tab="tier2_daily">
+            <span>5. Food & Transport</span>
+            <span class="lock-icon">🔒</span>
+          </li>
+          <li class="portal-nav-item locked" data-tab="tier2_quiz">
+            <span>6. Survival Exam</span>
+            <span class="lock-icon">🔒</span>
+          </li>
+
+          <li style="font-size: 0.72rem; font-weight: 800; color: #94a3b8; text-transform: uppercase; margin: 1rem 0 0.2rem; padding: 0 0.5rem;">
+            Tier 3: Fluency & Tools (₦2,000)
+          </li>
+          <li class="portal-nav-item locked" data-tab="tier3_epstopik">
+            <span>7. EPS-TOPIK Vocab</span>
+            <span class="lock-icon">🔒</span>
+          </li>
+          <li class="portal-nav-item locked" data-tab="tier3_srs">
+            <span>8. SRS Flashcards</span>
+            <span class="lock-icon">🔒</span>
+          </li>
+          <li class="portal-nav-item locked" data-tab="tier3_writing">
+            <span>9. Stroke Writing</span>
+            <span class="lock-icon">🔒</span>
+          </li>
+          <li class="portal-nav-item locked" data-tab="tier3_dialogue">
+            <span>10. AI Dialogue Simulator</span>
+            <span class="lock-icon">🔒</span>
+          </li>
+          <li class="portal-nav-item locked" data-tab="tier3_certificate">
+            <span>11. Official Certificate</span>
+            <span class="lock-icon">🔒</span>
+          </li>
+        </ul>
+      </aside>
+
+      <!-- Main Learning Area -->
+      <main class="portal-content-area" id="portalContentArea">
+        <!-- Rendered dynamically by app.js -->
+      </main>
+
+    </div>
+  </section>
+
+  <!-- ==============================================================================
+       TESTIMONIALS & TRUST
+       ============================================================================== -->
+  <section style="background: white; padding: 4rem 1.5rem; border-top: 1px solid var(--border);">
+    <div style="max-width: 1200px; margin: 0 auto;">
+      <div class="section-header">
+        <span class="badge badge-verified">Student Stories</span>
+        <h2 class="section-title">Nigerian Learners Succeeding with Korean Mastery</h2>
+      </div>
+
+      <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 1.5rem;">
+        <div style="background: #f8fafc; border: 1px solid #e2e8f0; border-radius: 12px; padding: 1.5rem;">
+          <p style="font-size: 0.9rem; color: #334155; margin-bottom: 1rem;">
+            "I spent months feeling intimidated by Korean until this course broke down Hangul in one day. The SRS flashcards and EPS-TOPIK vocabulary prepared me completely for my technical job tests."
+          </p>
+          <div style="display: flex; align-items: center; gap: 0.75rem;">
+            <div style="background: #1e3a8a; color: white; width: 40px; height: 40px; border-radius: 50%; display: flex; align-items: center; justify-content: center; font-weight: 700;">EO</div>
+            <div>
+              <div style="font-weight: 700; font-size: 0.92rem; color: #0f172a;">Emmanuel Okafor</div>
+              <div style="font-size: 0.78rem; color: #64748b;">Lagos • EPS-TOPIK Candidate</div>
+            </div>
+          </div>
+        </div>
+
+        <div style="background: #f8fafc; border: 1px solid #e2e8f0; border-radius: 12px; padding: 1.5rem;">
+          <p style="font-size: 0.9rem; color: #334155; margin-bottom: 1rem;">
+            "I applied for the Global Korea Scholarship through KCCN Abuja. Attaching the verified digital certificate from Korean Mastery helped prove my commitment during the 1st round screening!"
+          </p>
+          <div style="display: flex; align-items: center; gap: 0.75rem;">
+            <div style="background: #dc2626; color: white; width: 40px; height: 40px; border-radius: 50%; display: flex; align-items: center; justify-content: center; font-weight: 700;">AA</div>
+            <div>
+              <div style="font-weight: 700; font-size: 0.92rem; color: #0f172a;">Amina Abdullahi</div>
+              <div style="font-size: 0.78rem; color: #64748b;">Abuja • GKS Postgraduate Applicant</div>
+            </div>
+          </div>
+        </div>
+
+        <div style="background: #f8fafc; border: 1px solid #e2e8f0; border-radius: 12px; padding: 1.5rem;">
+          <p style="font-size: 0.9rem; color: #334155; margin-bottom: 1rem;">
+            "For just ₦500, the survival module explained the two number systems and food ordering way better than expensive private tutors in Ikeja. Best value for money."
+          </p>
+          <div style="display: flex; align-items: center; gap: 0.75rem;">
+            <div style="background: #059669; color: white; width: 40px; height: 40px; border-radius: 50%; display: flex; align-items: center; justify-content: center; font-weight: 700;">CI</div>
+            <div>
+              <div style="font-weight: 700; font-size: 0.92rem; color: #0f172a;">Chidimma Igwe</div>
+              <div style="font-size: 0.78rem; color: #64748b;">Enugu • K-Drama Enthusiast</div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ==============================================================================
+       FOOTER
+       ============================================================================== -->
+  <footer class="footer">
+    <div class="footer-container">
+      <div class="footer-col">
+        <div style="display: flex; align-items: center; gap: 0.5rem; margin-bottom: 1rem;">
+          <span style="font-size: 1.5rem;">🇰🇷</span>
+          <strong style="font-size: 1.15rem; color: white;">Korean Mastery Nigeria</strong>
+        </div>
+        <p style="font-size: 0.85rem; color: #94a3b8; max-width: 300px; line-height: 1.5;">
+          Nigeria's dedicated Korean learning platform. Empowering students, professionals, and jobseekers with practical language mastery and official credentials.
+        </p>
+      </div>
+
+      <div class="footer-col">
+        <h4>Course Tiers</h4>
+        <ul>
+          <li><a onclick="switchTab('tier1_hangul')">Tier 1: Free Foundation (₦0)</a></li>
+          <li><a onclick="startCheckout(2)">Tier 2: Survival Korean (₦500)</a></li>
+          <li><a onclick="startCheckout(3)">Tier 3: Fluency Suite (₦2,000)</a></li>
+        </ul>
+      </div>
+
+      <div class="footer-col">
+        <h4>Resources</h4>
+        <ul>
+          <li><a href="#epstopik">EPS-TOPIK Guide</a></li>
+          <li><a href="#epstopik">GKS Scholarship Roadmap</a></li>
+          <li><a onclick="switchTab('tier3_srs')">SRS Flashcards</a></li>
+          <li><a onclick="switchTab('tier3_writing')">Hangul Canvas</a></li>
+        </ul>
+      </div>
+
+      <div class="footer-col">
+        <h4>Legal & Trust</h4>
+        <ul>
+          <li><a onclick="openModal('termsModal')">Terms of Service</a></li>
+          <li><a onclick="openModal('privacyModal')">Privacy Policy</a></li>
+          <li><span style="color: #64748b; font-size: 0.85rem;">🔒 Secured by Paystack & Brevo</span></li>
+        </ul>
+      </div>
+    </div>
+
+    <div class="footer-bottom">
+      © 2026 Korean Mastery Nigeria. All rights reserved. Made for ambitious Nigerian learners.
+    </div>
+  </footer>
+
+  <!-- ==============================================================================
+       MODALS: AUTH, LEGAL & UPGRADES
+       ============================================================================== -->
+  
+  <!-- Register Modal -->
+  <div id="registerModal" class="modal-backdrop">
+    <div class="modal-card">
+      <button class="modal-close" onclick="closeModal('registerModal')">✕</button>
+      <h3 style="font-size: 1.35rem; font-weight: 800; color: #0f172a; margin-bottom: 0.25rem;">Create Your Free Account</h3>
+      <p style="color: #64748b; font-size: 0.85rem; margin-bottom: 1.5rem;">Start learning Hangul immediately with zero fees.</p>
+
+      <form id="registerForm">
+        <div style="margin-bottom: 1rem;">
+          <label style="display: block; font-size: 0.82rem; font-weight: 700; margin-bottom: 0.35rem;">Full Name</label>
+          <input type="text" name="full_name" required placeholder="e.g. Emmanuel Adeyemi" style="width: 100%; padding: 0.65rem 0.85rem; border-radius: 8px; border: 1px solid #cbd5e1; font-family: inherit;">
+        </div>
+
+        <div style="margin-bottom: 1rem;">
+          <label style="display: block; font-size: 0.82rem; font-weight: 700; margin-bottom: 0.35rem;">Email Address</label>
+          <input type="email" name="email" required placeholder="you@example.com" style="width: 100%; padding: 0.65rem 0.85rem; border-radius: 8px; border: 1px solid #cbd5e1; font-family: inherit;">
+        </div>
+
+        <div style="margin-bottom: 1.5rem;">
+          <label style="display: block; font-size: 0.82rem; font-weight: 700; margin-bottom: 0.35rem;">Password (Min 6 characters)</label>
+          <input type="password" name="password" required minlength="6" placeholder="••••••••" style="width: 100%; padding: 0.65rem 0.85rem; border-radius: 8px; border: 1px solid #cbd5e1; font-family: inherit;">
+        </div>
+
+        <button type="submit" class="btn btn-primary" style="width: 100%; padding: 0.75rem;">Create Account & Start Learning</button>
+      </form>
+
+      <div style="text-align: center; margin-top: 1.25rem; font-size: 0.85rem; color: #64748b;">
+        Already have an account? <a onclick="closeModal('registerModal'); openModal('loginModal')" style="color: #2563eb; font-weight: 700; cursor: pointer;">Log In</a>
+      </div>
+    </div>
+  </div>
+
+  <!-- Login Modal -->
+  <div id="loginModal" class="modal-backdrop">
+    <div class="modal-card">
+      <button class="modal-close" onclick="closeModal('loginModal')">✕</button>
+      <h3 style="font-size: 1.35rem; font-weight: 800; color: #0f172a; margin-bottom: 0.25rem;">Welcome Back</h3>
+      <p style="color: #64748b; font-size: 0.85rem; margin-bottom: 1.5rem;">Log in to access your dashboard and lessons.</p>
+
+      <form id="loginForm">
+        <div style="margin-bottom: 1rem;">
+          <label style="display: block; font-size: 0.82rem; font-weight: 700; margin-bottom: 0.35rem;">Email Address</label>
+          <input type="email" name="email" required placeholder="you@example.com" style="width: 100%; padding: 0.65rem 0.85rem; border-radius: 8px; border: 1px solid #cbd5e1; font-family: inherit;">
+        </div>
+
+        <div style="margin-bottom: 1.5rem;">
+          <label style="display: block; font-size: 0.82rem; font-weight: 700; margin-bottom: 0.35rem;">Password</label>
+          <input type="password" name="password" required placeholder="••••••••" style="width: 100%; padding: 0.65rem 0.85rem; border-radius: 8px; border: 1px solid #cbd5e1; font-family: inherit;">
+        </div>
+
+        <button type="submit" class="btn btn-primary" style="width: 100%; padding: 0.75rem;">Log In to Classroom</button>
+      </form>
+
+      <div style="text-align: center; margin-top: 1.25rem; font-size: 0.85rem; color: #64748b;">
+        Don't have an account yet? <a onclick="closeModal('loginModal'); openModal('registerModal')" style="color: #2563eb; font-weight: 700; cursor: pointer;">Register Free</a>
+      </div>
+    </div>
+  </div>
+
+  <!-- Upgrade Modal -->
+  <div id="upgradeModal" class="modal-backdrop">
+    <div class="modal-card" style="text-align: center;">
+      <button class="modal-close" onclick="closeModal('upgradeModal')">✕</button>
+      <div style="font-size: 2.2rem; margin-bottom: 0.5rem;">🔒</div>
+      <h3 id="upgradeModalTitle" style="font-size: 1.35rem; font-weight: 800; color: #0f172a; margin-bottom: 0.5rem;">Unlock Course Access</h3>
+      <p style="color: #64748b; font-size: 0.88rem; margin-bottom: 1.5rem;">This module requires an active tier upgrade. One-time payment with lifetime access.</p>
+      
+      <div style="font-size: 2.2rem; font-weight: 900; color: #1e3a8a; margin-bottom: 1.5rem;" id="upgradeModalPrice">₦500</div>
+
+      <button id="upgradeModalBtn" class="btn btn-primary btn-lg" style="width: 100%; margin-bottom: 0.75rem;">
+        Upgrade Now via Paystack
+      </button>
+      <button class="btn btn-outline btn-sm" style="width: 100%;" onclick="closeModal('upgradeModal')">Maybe Later</button>
+    </div>
+  </div>
+
+  <!-- Plain-Language Terms of Service Modal -->
+  <div id="termsModal" class="modal-backdrop">
+    <div class="modal-card">
+      <button class="modal-close" onclick="closeModal('termsModal')">✕</button>
+      <h3 style="font-size: 1.35rem; font-weight: 800; color: #0f172a; margin-bottom: 1rem;">Terms of Service</h3>
+      <div style="font-size: 0.88rem; color: #334155; line-height: 1.6; display: flex; flex-direction: column; gap: 0.85rem;">
+        <p><strong>1. Our Simple Promise:</strong> Korean Mastery Nigeria provides educational Korean language learning materials, tools, quizzes, and certificates. When you purchase a tier, you receive lifetime digital access to that tier.</p>
+        <p><strong>2. One-Time Payment, Zero Recurring Charges:</strong> All paid tiers (₦500 and ₦2,000) are strictly one-time payments processed in Nigerian Naira (NGN). We will never charge your card again without your explicit authorization.</p>
+        <p><strong>3. Transparent Refund Policy:</strong> If you experience any technical defect or payment billing issue, contact support and we will rectify it or issue a prompt refund within 7 days of purchase.</p>
+        <p><strong>4. Personal Learning License:</strong> Your login account is for your individual use. Sharing login credentials publicly is prohibited to maintain server security and certificate integrity.</p>
+        <p><strong>5. Educational Credential:</strong> Our certificate verifies curriculum mastery within our platform. Official government programs (such as EPS-TOPIK administered by HRD Korea or GKS via NIIED) require taking their respective exams through official embassy channels.</p>
+      </div>
+    </div>
+  </div>
+
+  <!-- Plain-Language Privacy Policy Modal -->
+  <div id="privacyModal" class="modal-backdrop">
+    <div class="modal-card">
+      <button class="modal-close" onclick="closeModal('privacyModal')">✕</button>
+      <h3 style="font-size: 1.35rem; font-weight: 800; color: #0f172a; margin-bottom: 1rem;">Privacy Policy</h3>
+      <div style="font-size: 0.88rem; color: #334155; line-height: 1.6; display: flex; flex-direction: column; gap: 0.85rem;">
+        <p><strong>1. Information We Collect:</strong> We collect only the information necessary to provide your course access and certificate: your name, email address, and lesson progress.</p>
+        <p><strong>2. Payment Security:</strong> We do NOT store your bank card numbers, CVVs, or bank account PINs on our servers. All financial transactions are processed directly by Paystack, a licensed and PCI-DSS certified payment processor in Nigeria.</p>
+        <p><strong>3. Email Communications:</strong> We use transactional email (Brevo) solely to send your login access, receipts, and certificate files. We will never sell or rent your email address to third parties or spammers.</p>
+        <p><strong>4. Data Control:</strong> You can request the deletion of your account and learning records at any time by contacting support.</p>
+      </div>
+    </div>
+  </div>
+
+  <!-- Scripts -->
+  <script src="data.js"></script>
+  <script src="app.js"></script>
+</body>
+</html>

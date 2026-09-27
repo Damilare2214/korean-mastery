@@ -1,0 +1,3 @@
+# Netlify API Proxying to Render Backend
+/api/*  https://korean-mastery-backend.onrender.com/api/:splat  200
+/*      /index.html                                            200
