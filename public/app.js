@@ -142,9 +142,15 @@ function logout() {
 async function handleRegister(e) {
   e.preventDefault();
   const form = e.target;
+  const submitBtn = form.querySelector('button[type="submit"]');
+  const originalBtnText = submitBtn.innerText;
+  
   const full_name = form.full_name.value.trim();
   const email = form.email.value.trim();
   const password = form.password.value.trim();
+
+  submitBtn.disabled = true;
+  submitBtn.innerText = "Creating account...";
 
   try {
     const res = await fetch(`${API_BASE}/auth/register`, {
@@ -166,15 +172,24 @@ async function handleRegister(e) {
       alert(data.message || "Registration failed. Please check your details.");
     }
   } catch (err) {
-    alert("Network error during registration.");
+    alert("The server is waking up. Please wait 10 seconds and tap the button again!");
+  } finally {
+    submitBtn.disabled = false;
+    submitBtn.innerText = originalBtnText;
   }
 }
 
 async function handleLogin(e) {
   e.preventDefault();
   const form = e.target;
+  const submitBtn = form.querySelector('button[type="submit"]');
+  const originalBtnText = submitBtn.innerText;
+
   const email = form.email.value.trim();
   const password = form.password.value.trim();
+
+  submitBtn.disabled = true;
+  submitBtn.innerText = "Logging in...";
 
   try {
     const res = await fetch(`${API_BASE}/auth/login`, {
@@ -196,7 +211,10 @@ async function handleLogin(e) {
       alert(data.message || "Invalid email or password.");
     }
   } catch (err) {
-    alert("Network error during login.");
+    alert("The server is waking up. Please wait 10 seconds and tap the button again!");
+  } finally {
+    submitBtn.disabled = false;
+    submitBtn.innerText = originalBtnText;
   }
 }
 
