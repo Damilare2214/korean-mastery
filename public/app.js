@@ -235,7 +235,7 @@ async function startCheckout(tier) {
     return;
   }
 
-  const tierPriceStr = tier === 3 ? "₦2,000" : "₦500";
+  showNotification("Connecting to Paystack secure checkout...", "info");
 
   try {
     const res = await fetch(`${API_BASE}/paystack/initialize`, {
@@ -248,34 +248,42 @@ async function startCheckout(tier) {
     });
     const data = await res.json();
 
-    if (!res.ok) {
-      alert(data.message || "Failed to initialize checkout.");
+    if (!res.ok || data.status !== 'success') {
+      alert(data.message || "Failed to initialize Paystack checkout. Please try again.");
       return;
     }
 
-    // Check if PaystackPop library is loaded
-    if (typeof PaystackPop !== 'undefined' && data.public_key && !data.public_key.startsWith('pk_test_demo')) {
-      const handler = PaystackPop.setup({
-        key: data.public_key,
-        email: state.user.email,
-        amount: data.amount_kobo,
-        ref: data.reference,
-        currency: 'NGN',
-        callback: async function(response) {
-          await verifyPaymentServer(response.reference, tier);
-        },
-        onClose: function() {
-          showNotification("Payment window closed. If you already transferred, your access will auto-reconcile.", "info");
-        }
-      });
-      handler.openIframe();
-    } else {
-      // In-App Instant Safe Checkout Modal for testing/demo
-      showPaymentSimulationModal(tier, data.reference, data.amount_kobo);
+    // 1. If Paystack returned a live authorization URL:
+    if (data.authorization_url) {
+      if (typeof PaystackPop !== 'undefined' && data.public_key && !data.public_key.startsWith('pk_test_demo')) {
+        const handler = PaystackPop.setup({
+          key: data.public_key,
+          email: state.user.email,
+          amount: data.amount_kobo,
+          ref: data.reference,
+          currency: 'NGN',
+          callback: async function(response) {
+            showNotification("Payment received! Activating your course...", "info");
+            await verifyPaymentServer(response.reference, tier);
+          },
+          onClose: function() {
+            showNotification("Checking payment status...", "info");
+            fetchCurrentUser();
+          }
+        });
+        handler.openIframe();
+      } else {
+        // Direct redirect to Paystack Checkout page
+        window.location.href = data.authorization_url;
+      }
+      return;
     }
 
+    // 2. Demo fallback if no live keys
+    showPaymentSimulationModal(tier, data.reference, data.amount_kobo);
+
   } catch (err) {
-    alert("Error connecting to payment gateway.");
+    alert("Server is connecting. Please wait 5 seconds and click Unlock again!");
   }
 }
 
