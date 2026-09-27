@@ -1271,14 +1271,25 @@ def verify_cert_public(cert_code):
 
 
 # ------------------------------------------------------------------------------
-# SECURITY & STATIC FILE SERVING (STRICT 404 ON SENSITIVE FILES)
+# SECURITY, CORS & STATIC FILE SERVING
 # ------------------------------------------------------------------------------
+
+@app.after_request
+def add_cors_headers(response):
+    """Enable cross-origin resource sharing for Netlify frontend."""
+    response.headers['Access-Control-Allow-Origin'] = '*'
+    response.headers['Access-Control-Allow-Headers'] = 'Content-Type, Authorization'
+    response.headers['Access-Control-Allow-Methods'] = 'GET, POST, PUT, DELETE, OPTIONS'
+    return response
 
 FORBIDDEN_EXTENSIONS = ('.py', '.db', '.env', '.sql', '.sh', '.git', '.json', '.yml', '.yaml')
 
 @app.before_request
-def block_sensitive_requests():
-    """Blocks any attempt to read code, database, or sensitive config files."""
+def handle_preflight_and_security():
+    """Handles CORS preflight OPTIONS and blocks sensitive file attempts."""
+    if request.method == 'OPTIONS':
+        return ('', 204)
+
     path = request.path.lower()
     for ext in FORBIDDEN_EXTENSIONS:
         if path.endswith(ext):

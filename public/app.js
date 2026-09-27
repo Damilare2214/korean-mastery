@@ -16,8 +16,10 @@ const state = {
   canvasDrawing: false
 };
 
-// API Base URL (Relative for seamless proxy/production deployment)
-const API_BASE = '/api';
+// API Base URL (Auto-switches to Render Production Backend or local proxy)
+const API_BASE = window.location.hostname.includes('netlify.app') 
+  ? 'https://korean-mastery-backend.onrender.com/api' 
+  : '/api';
 
 // ==============================================================================
 // INITIALIZATION & EVENT LISTENERS
