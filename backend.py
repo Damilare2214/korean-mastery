@@ -842,12 +842,17 @@ def initialize_payment(user):
 
     # If Live / Test Paystack Key is configured:
     if PAYSTACK_SECRET_KEY:
+        origin_url = request.headers.get('Origin') or request.headers.get('Referer') or request.host_url
+        clean_origin = origin_url.rstrip('/')
+        if '/#' in clean_origin:
+            clean_origin = clean_origin.split('/#')[0]
+
         try:
             payload = {
                 "email": user['email'],
                 "amount": amount_kobo,
                 "reference": reference,
-                "callback_url": request.host_url.rstrip('/') + "/#payment-success",
+                "callback_url": f"{clean_origin}/#payment-success",
                 "metadata": {
                     "user_id": user['id'],
                     "tier": target_tier,

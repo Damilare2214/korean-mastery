@@ -235,7 +235,7 @@ async function startCheckout(tier) {
     return;
   }
 
-  showNotification("Connecting to Paystack secure checkout...", "info");
+  showNotification("Redirecting to Paystack secure checkout...", "info");
 
   try {
     const res = await fetch(`${API_BASE}/paystack/initialize`, {
@@ -253,37 +253,18 @@ async function startCheckout(tier) {
       return;
     }
 
-    // 1. If Paystack returned a live authorization URL:
+    // Direct redirect to official Paystack payment dashboard
     if (data.authorization_url) {
-      if (typeof PaystackPop !== 'undefined' && data.public_key && !data.public_key.startsWith('pk_test_demo')) {
-        const handler = PaystackPop.setup({
-          key: data.public_key,
-          email: state.user.email,
-          amount: data.amount_kobo,
-          ref: data.reference,
-          currency: 'NGN',
-          callback: async function(response) {
-            showNotification("Payment received! Activating your course...", "info");
-            await verifyPaymentServer(response.reference, tier);
-          },
-          onClose: function() {
-            showNotification("Checking payment status...", "info");
-            fetchCurrentUser();
-          }
-        });
-        handler.openIframe();
-      } else {
-        // Direct redirect to Paystack Checkout page
-        window.location.href = data.authorization_url;
-      }
+      window.location.href = data.authorization_url;
       return;
     }
 
-    // 2. Demo fallback if no live keys
+    // Demo simulation fallback if no live keys
     showPaymentSimulationModal(tier, data.reference, data.amount_kobo);
 
   } catch (err) {
-    alert("Server is connecting. Please wait 5 seconds and click Unlock again!");
+    console.error("Checkout error:", err);
+    alert("Connection error: " + (err.message || "Please check your network and click Unlock again."));
   }
 }
 
