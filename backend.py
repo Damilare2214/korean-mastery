@@ -639,7 +639,7 @@ def health_check():
 # AUTHENTICATION: SIGNUP, LOGIN, PROFILE, ME (WITH SELF-HEALING RECONCILIATION)
 # ------------------------------------------------------------------------------
 
-@app.route('/api/auth/google', methods=['POST'])
+@app.route('/api/auth/google', methods=['GET', 'POST', 'OPTIONS'])
 def google_auth():
     """
     Authenticate or register student using Google Identity Services ID token.
